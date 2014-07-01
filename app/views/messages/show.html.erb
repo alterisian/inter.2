@@ -1,34 +1,32 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Message -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Message %></h1>
+</div>
 
-<p>
-  <strong>Message:</strong>
-  <%= @message.message %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:message) %></dt>
+      <dd><pre class="prettyprint"><%= @message.message %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:read) %></dt>
+      <dd><pre class="prettyprint"><%= @message.read %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:previous_message_id) %></dt>
+      <dd><pre class="prettyprint"><%= @message.previous_message_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:next_message_id) %></dt>
+      <dd><pre class="prettyprint"><%= @message.next_message_id %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:from_user_id) %></dt>
+      <dd><pre class="prettyprint"><%= @message.from_user_id %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Read:</strong>
-  <%= @message.read %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              messages_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_message_path(@message), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              message_path(@message),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Previous message:</strong>
-  <%= @message.previous_message_id %>
-</p>
-
-<p>
-  <strong>Next message:</strong>
-  <%= @message.next_message_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @message.user %>
-</p>
-
-<p>
-  <strong>From user:</strong>
-  <%= @message.from_user_id %>
-</p>
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
